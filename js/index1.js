@@ -12,15 +12,14 @@
             url: './data/get_bookshelf.php',
             page: 1,
             pageSize: 10,
-            loadingMore: '点击加载更多',
             loadingText: '加载中，请稍后……',
             noDataText: '暂无数据',
             noMoreText: '没有更多了！',
-            limitHeight: 10,
-            eventScroll: 'click' //scroll或者click
+            limitHeight: 10
         };
         var opts = $.extend(defaults || {}, options);
         //定义方法
+
         var methods = {
             //ajax
             fetch: function () {
@@ -30,6 +29,7 @@
                 $.ajax({
                     type: opts.method,
                     url: opts.url,
+                    //data: {page: opts.page},
                     data: opts.param,
                     dataType: 'json',
                     success: function (data) {
@@ -53,18 +53,18 @@
             },
             bindScrollEvent: function () {
                 var that = this;
-                opts.$win.on(opts.eventScroll, function () {
+                opts.$win.on('scroll', function () {
                     that.htmlTpl();
                 })
             },
             noMore: function () {
-                //没有更多时
-                opts.$win.off(opts.eventScroll);
+              //没有更多时
+                opts.$win.off('scroll');
                 opts.$btn.text(opts.noMoreText);
             },
             noData: function () {
                 //没有数据时
-                opts.$win.off(opts.eventScroll);
+                opts.$win.off('scroll');
                 opts.$btn.text(opts.noDataText);
             },
             render: function (data) {
@@ -87,9 +87,7 @@
             },
             init: function () {
                 this.bindScrollEvent();
-                //如果第一页的数据不满一页时（即第一页的数据是后台输出的），首先去请求一次接口
                 this.htmlTpl();
-
             }
         };
         methods.init();

@@ -55,7 +55,25 @@
 <script src="js/index.js"></script>
 <script>
     $(function(){
-        $.loadMore()
+        //直接调用
+        /*$.loadMore();*/
+
+        //ajax请求传不同的参数
+        /*$.loadMore({
+            param:{
+                data: 111,
+                sort: 'no'
+            }
+        });*/
+
+        //传click事件---默认scroll事件
+        $.loadMore({
+            param:{
+                data: 111,
+                sort: 'no'
+            },
+            eventScroll: 'click'
+        })
     });
 </script>
 </body>
