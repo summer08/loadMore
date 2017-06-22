@@ -91,8 +91,6 @@
                 //如果第一页的数据不满一页时（即第一页的数据是后台输出的），首先去请求一次接口
                 this.htmlTpl();
                 //判断按钮显示的文字
-                console.log(opts.$btn)
-                console.log()
                 if(opts.eventScroll == 'scroll'){
                     opts.$btn.text('加载中，请稍后……');
                 }else{
